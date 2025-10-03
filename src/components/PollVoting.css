@@ -1,0 +1,278 @@
+/* ---------------------------
+   PollVoting.css
+   Basit, temiz, responsive UI
+   --------------------------- */
+
+/* Renk değişkenleri (kolay tema ayarı) */
+:root {
+  --bg: #ffffff;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e5e7eb;
+  --primary: #4f46e5;
+  --primary-weak: #eef2ff;
+  --success: #0ea5e9; /* progress bar default */
+  --winner: #16a34a;
+  --danger: #b42318;
+  --shadow: 0 6px 20px rgba(2, 6, 23, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1220;
+    --card: #0f172a;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --border: #1f2a44;
+    --primary: #6366f1;
+    --primary-weak: #11163a;
+    --success: #22d3ee;
+    --winner: #22c55e;
+    --danger: #ef4444;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.24);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.poll-voting {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    sans-serif;
+}
+
+.header {
+  margin-bottom: 14px;
+}
+.header h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 700;
+}
+.header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Empty State */
+.empty-state {
+  border: 1px dashed var(--border);
+  background: color-mix(in oklab, var(--card) 92%, var(--primary-weak));
+  padding: 18px;
+  border-radius: 14px;
+  text-align: center;
+  color: var(--muted);
+}
+.empty-state p {
+  margin: 0 0 12px;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.04s ease, box-shadow 0.2s ease, background 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--primary-weak);
+  color: var(--primary);
+  border-color: color-mix(in oklab, var(--primary) 24%, var(--border));
+}
+.btn-secondary:hover {
+  filter: brightness(1.03);
+}
+
+/* Soru kartı */
+.poll-question {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin: 10px 0 14px;
+  box-shadow: var(--shadow);
+  font-weight: 600;
+}
+
+/* Seçenekler */
+.choices-list {
+  display: grid;
+  gap: 10px;
+}
+
+/* Choice Card (tıklanabilir) */
+.choice-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  box-shadow: var(--shadow);
+  transition: border-color 0.15s ease, transform 0.04s ease,
+    background 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+}
+.choice-card:hover {
+  border-color: color-mix(in oklab, var(--primary) 40%, var(--border));
+  transform: translateY(-1px);
+}
+.choice-card:active {
+  transform: translateY(0);
+}
+
+.choice-card.winner {
+  border-color: color-mix(in oklab, var(--winner) 60%, var(--border));
+  background: color-mix(in oklab, var(--card) 88%, var(--winner));
+}
+
+/* Başlık */
+.choice-header h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+/* Vote Bar */
+.vote-bar {
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--border) 80%, var(--card));
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.vote-progress {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  background: linear-gradient(
+    90deg,
+    var(--success),
+    color-mix(in oklab, var(--success) 70%, var(--primary))
+  );
+  border-radius: 999px;
+  transition: width 0.45s ease;
+}
+
+/* Alt bilgi */
+.choice-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.location {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 68%;
+}
+.vote-count {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Mekan Ekle */
+.add-place {
+  margin-top: 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: var(--shadow);
+}
+.add-place h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+.add-place input {
+  width: 100%;
+  height: 40px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  background: var(--bg);
+  color: var(--text);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.add-place input + input {
+  margin-top: 8px;
+}
+.add-place input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 22%, transparent);
+}
+.add-place .btn-secondary {
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* Küçük ekran optimizasyonları */
+@media (min-width: 560px) {
+  .add-place input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+}
+
+/* Yardımcı sınıflar (isteğe bağlı) */
+.hidden {
+  display: none !important;
+}
+.center {
+  text-align: center;
+}
+/* Kullanıcının oy verdiği kartı vurgula */
+.choice-card.voted {
+  border-color: color-mix(in oklab, var(--primary) 55%, var(--border));
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--primary) 18%, transparent),
+    var(--shadow);
+}
+
+/* "Senin oyun" rozeti */
+.my-vote-chip {
+  margin-left: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: var(--primary);
+  background: var(--primary-weak);
+  border: 1px solid color-mix(in oklab, var(--primary) 30%, var(--border));
+}

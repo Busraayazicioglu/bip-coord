@@ -1,38 +1,145 @@
-.App {
-  text-align: center;
+/* ------------------------------------
+   App.css
+   Global temel stiller + tema
+   ------------------------------------ */
+
+/* Tema değişkenleri (diğer css’lerle uyumlu) */
+:root {
+  --bg: #ffffff;
+  --card: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e5e7eb;
+  --primary: #4f46e5;
+  --primary-weak: #eef2ff;
+  --success: #16a34a;
+  --danger: #b42318;
+  --orange: #f59e0b;
+  --purple: #8b5cf6;
+  --shadow: 0 6px 20px rgba(2, 6, 23, 0.06);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b1220;
+    --card: #0f172a;
+    --text: #e5e7eb;
+    --muted: #94a3b8;
+    --border: #1f2a44;
+    --primary: #6366f1;
+    --primary-weak: #11163a;
+    --success: #22c55e;
+    --danger: #ef4444;
+    --orange: #f59e0b;
+    --purple: #a78bfa;
+    --shadow: 0 6px 24px rgba(0, 0, 0, 0.24);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Basit reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background: radial-gradient(
+      1200px 600px at -10% -10%,
+      color-mix(in oklab, var(--primary-weak) 35%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      1000px 500px at 110% 0%,
+      color-mix(in oklab, var(--purple) 20%, transparent),
+      transparent 60%
+    ),
+    var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Uygulama kapsayıcı */
+.App {
+  min-height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 12px;
 }
 
-.App-link {
-  color: #61dafb;
+/* Linkler */
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Scrollbar (modern tarayıcılar) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--primary) 40%, var(--border))
+    transparent;
+}
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--primary) 40%, var(--border));
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Toastify uyumu */
+:root {
+  --toastify-color-success: var(--success);
+  --toastify-color-error: var(--danger);
+  --toastify-color-warning: var(--orange);
+  --toastify-color-info: var(--primary);
+  --toastify-toast-background: var(--card);
+  --toastify-text-color-light: var(--text);
+  --toastify-color-light: var(--card);
+  --toastify-color-progress-light: var(--primary);
+  --toastify-font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI,
+    Roboto, sans-serif;
+}
+.Toastify__toast {
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 12px !important;
+}
+
+/* Modal overlay ile stacking uyumu */
+.modal-overlay {
+  z-index: 60;
+}
+.Toastify {
+  z-index: 80;
+} /* toast modalları bastırmasın */
+
+/* Yardımcı */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.text-muted {
+  color: var(--muted);
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
 }
